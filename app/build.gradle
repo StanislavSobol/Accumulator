@@ -41,6 +41,7 @@ dependencies {
 
     // ui
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
 
     //    unit testing
     testImplementation 'junit:junit:4.12'

@@ -1,11 +1,11 @@
 package ru.list.sobols
 
-import androidx.appcompat.app.AppCompatActivity
-
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IMainRouter {
+
 
     private var mFrameHolder: FrameLayout? = null
 
@@ -13,5 +13,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mFrameHolder = findViewById(R.id.mainActivityFrameHolder)
+        toMvvmFragment()
+    }
+
+    override fun toMvvmFragment() {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.mainActivityFrameHolder, MvvmMainFragment.newInstance())
+                .commit()
     }
 }
