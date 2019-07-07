@@ -3,7 +3,6 @@ package ru.list.sobols
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import ru.list.sobols.mvplib.MvpMainFragment
 
 class MainActivity : AppCompatActivity(), IMainRouter {
 

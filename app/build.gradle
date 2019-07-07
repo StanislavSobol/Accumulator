@@ -45,7 +45,4 @@ dependencies {
     // instrumental testing
     androidTestImplementation "com.android.support:support-annotations:${support_version}"
     androidTestImplementation "com.android.support.test:runner:${compat_version}"
-
-    // lib
-    compile project(path: ':mvplib')
 }

@@ -1,4 +1,4 @@
-package ru.list.sobols.mvplib
+package ru.list.sobols
 
 import android.os.Bundle
 import android.view.LayoutInflater
