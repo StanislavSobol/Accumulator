@@ -1,9 +1,9 @@
 package ru.list.sobols.di
 
+import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.list.sobols.MApplication
-import ru.list.sobols.api.Client
 import javax.inject.Singleton
 
 
@@ -17,9 +17,9 @@ interface AppComponent {
         fun build(): AppComponent
 
         @BindsInstance
-        fun appContext(application: MApplication): Builder
-
-        @BindsInstance
-        fun retrofit(client: Client): Builder
+        fun appContext(appContext: Context): Builder
+//
+//        @BindsInstance
+//        fun retrofit(client: Client): Builder
     }
 }

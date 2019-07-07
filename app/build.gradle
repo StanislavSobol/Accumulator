@@ -45,6 +45,19 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 
+    // Moxy
+    // https://github.com/jordan1997/Moxy?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7547
+    implementation 'com.github.moxy-community:moxy:1.0.13'
+    kapt 'com.github.moxy-community:moxy-compiler:1.0.13'
+    implementation 'com.github.moxy-community:moxy-android:1.0.13'
+    implementation 'com.github.moxy-community:moxy-androidx:1.0.13'
+
+//    kapt 'com.arello-mobile:moxy-compiler:1.5.5'
+////    implementation "com.arello-mobile:moxy:1.5.5"
+////    implementation "com.arello-mobile:moxy-app-compat:1.5.3"
+//    implementation 'com.arello-mobile:moxy-android:1.5.5'
+//    implementation 'tech.schoolhelper:moxy-x-androidx:1.7.0'
+
     // ui
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.recyclerview:recyclerview:1.0.0"

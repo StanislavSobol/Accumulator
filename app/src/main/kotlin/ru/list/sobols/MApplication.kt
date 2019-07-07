@@ -1,10 +1,8 @@
 package ru.list.sobols
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import ru.list.sobols.api.Api
-import ru.list.sobols.api.Client
 import ru.list.sobols.di.AppComponent
 import ru.list.sobols.di.DaggerAppComponent
 import ru.list.sobols.di.InjectedStub
@@ -14,8 +12,8 @@ class MApplication : Application() {
 
     @Inject
     lateinit var stub: InjectedStub
-    @Inject
-    lateinit var appContext: Context
+    //    @Inject
+//    lateinit var appContext: Context
     @Inject
     lateinit var api: Api
 
@@ -25,14 +23,14 @@ class MApplication : Application() {
         super.onCreate()
         daggerAppComponent = DaggerAppComponent
                 .builder()
-                .appContext(this)
-                .retrofit(Client())
+                .appContext(this.applicationContext)
+//                .retrofit(Client())
                 .build()
         daggerAppComponent.inject(this)
 
         Log.d("SSS", "-------------------------------------------------------------------")
         Log.d("SSS", "stub = $stub")
-        Log.d("SSS", "context1 = $appContext")
+//        Log.d("SSS", "context1 = $appContext")
         Log.d("SSS", "context2 = " + applicationContext)
         Log.d("SSS", "api = " + api)
     }

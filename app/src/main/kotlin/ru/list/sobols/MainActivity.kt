@@ -3,6 +3,7 @@ package ru.list.sobols
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import ru.list.sobols.mvppart.MvpPartMainFragment
 
 class MainActivity : AppCompatActivity(), IMainRouter {
 
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity(), IMainRouter {
     override fun toMvvmFragment() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.mainActivityFrameHolder, MvpMainFragment.newInstance())
+                .replace(R.id.mainActivityFrameHolder, MvpPartMainFragment.newInstance())
                 .commit()
     }
 }

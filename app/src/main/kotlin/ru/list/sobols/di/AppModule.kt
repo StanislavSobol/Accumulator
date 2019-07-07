@@ -1,8 +1,8 @@
 package ru.list.sobols.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
-import ru.list.sobols.MApplication
 import ru.list.sobols.api.Client
 import javax.inject.Singleton
 
@@ -13,9 +13,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideApplication(application: MApplication) = application.applicationContext
+    fun provideApplication(appContext: Context) = appContext
 
     @Provides
     @Singleton
-    fun provideApi(client: Client) = client.api
+    fun provideApi() = Client().api
 }
