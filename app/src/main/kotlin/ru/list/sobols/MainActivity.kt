@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), IMainRouter {
     override fun toMvvmFragment() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.mainActivityFrameHolder, MvvmMainFragment.newInstance())
+                .replace(R.id.mainActivityFrameHolder, MvpMainFragment.newInstance())
                 .commit()
     }
 }
