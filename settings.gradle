@@ -1,1 +1,1 @@
-include ':app', ':mvplib', ':corelib'
+include ':app', ':mvplib'
