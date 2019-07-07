@@ -14,7 +14,9 @@ class MainActivity : AppCompatActivity(), IMainRouter {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mFrameHolder = findViewById(R.id.mainActivityFrameHolder)
-        toMvvmFragment()
+        if (savedInstanceState == null) {
+            toMvvmFragment()
+        }
     }
 
     override fun toMvvmFragment() {

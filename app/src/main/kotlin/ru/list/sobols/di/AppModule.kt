@@ -3,10 +3,10 @@ package ru.list.sobols.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import ru.list.sobols.api.Api
 import ru.list.sobols.api.Client
 import ru.list.sobols.interactor.IInteractor
 import ru.list.sobols.interactor.Interactor
-import ru.list.sobols.mvppart.MvpPartMainPresenter
 import javax.inject.Singleton
 
 @Module
@@ -24,8 +24,5 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideInteractor(): IInteractor = Interactor()
-
-    @Provides
-    fun provideMvpPartPresenter(interactor: IInteractor) = MvpPartMainPresenter(interactor)
+    fun provideInteractor(api: Api): IInteractor = Interactor(api)
 }

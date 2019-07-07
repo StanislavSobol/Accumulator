@@ -4,15 +4,16 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.list.sobols.MApplication
-import ru.list.sobols.mvppart.MvpPartMainFragment
+import ru.list.sobols.interactor.IInteractor
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [(AppModule::class)])
 interface AppComponent {
 
+    fun interactor(): IInteractor
+
     fun inject(body: MApplication)
-    fun inject(body: MvpPartMainFragment)
 
     @Component.Builder
     interface Builder {
