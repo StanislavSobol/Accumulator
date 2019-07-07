@@ -1,4 +1,4 @@
-package ru.list.sobols
+package ru.list.sobols.mvplib
 
 import android.os.Bundle
 import android.view.View
