@@ -1,9 +1,10 @@
 package ru.list.sobols
 
 import android.app.Application
-import ru.list.sobols.di.AppComponents
-import ru.list.sobols.di.AppModules
-import ru.list.sobols.di.DaggerAppComponents
+import android.content.Context
+import android.util.Log
+import ru.list.sobols.di.AppComponent
+import ru.list.sobols.di.DaggerAppComponent
 import ru.list.sobols.di.InjectedStub
 import javax.inject.Inject
 
@@ -11,12 +12,23 @@ class MApplication : Application() {
 
     @Inject
     lateinit var stub: InjectedStub
+    @Inject
+    lateinit var appContext: Context
 
-    private lateinit var daggerAppComponents: AppComponents
+    private lateinit var daggerAppComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
-        daggerAppComponents = DaggerAppComponents.builder().appModules(AppModules()).build()
-        daggerAppComponents.inject(this)
+        daggerAppComponent = DaggerAppComponent
+                .builder()
+                .application(this)
+                //    .appModules(AppModule())
+                .build()
+        daggerAppComponent.inject(this)
+
+        Log.d("SSS", "-------------------------------------------------------------------")
+        Log.d("SSS", "stub = $stub")
+        Log.d("SSS", "context1 = $appContext")
+        Log.d("SSS", "context2 = " + applicationContext)
     }
 }
