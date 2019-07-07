@@ -4,13 +4,15 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.list.sobols.MApplication
+import ru.list.sobols.mvppart.MvpPartMainFragment
 import javax.inject.Singleton
-
 
 @Singleton
 @Component(modules = [(AppModule::class)])
 interface AppComponent {
-    fun inject(mApplication: MApplication)
+
+    fun inject(body: MApplication)
+    fun inject(body: MvpPartMainFragment)
 
     @Component.Builder
     interface Builder {
@@ -18,8 +20,5 @@ interface AppComponent {
 
         @BindsInstance
         fun appContext(appContext: Context): Builder
-//
-//        @BindsInstance
-//        fun retrofit(client: Client): Builder
     }
 }

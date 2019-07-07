@@ -1,20 +1,26 @@
 package ru.list.sobols.mvppart
 
 import android.os.Bundle
-import android.view.View
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import ru.list.sobols.MApplication
+import javax.inject.Inject
 
 class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
 
+    @Inject
     @InjectPresenter
     lateinit var presenter: MvpPartMainPresenter
 
     @ProvidePresenter
-    fun providePresenter() = MvpPartMainPresenter()
+    fun providePresenter() = presenter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    init {
+        MApplication.getDaggerComponents().inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     companion object {

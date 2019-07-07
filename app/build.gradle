@@ -47,16 +47,10 @@ dependencies {
 
     // Moxy
     // https://github.com/jordan1997/Moxy?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7547
-    implementation 'com.github.moxy-community:moxy:1.0.13'
-    kapt 'com.github.moxy-community:moxy-compiler:1.0.13'
-    implementation 'com.github.moxy-community:moxy-android:1.0.13'
-    implementation 'com.github.moxy-community:moxy-androidx:1.0.13'
-
-//    kapt 'com.arello-mobile:moxy-compiler:1.5.5'
-////    implementation "com.arello-mobile:moxy:1.5.5"
-////    implementation "com.arello-mobile:moxy-app-compat:1.5.3"
-//    implementation 'com.arello-mobile:moxy-android:1.5.5'
-//    implementation 'tech.schoolhelper:moxy-x-androidx:1.7.0'
+    implementation "com.github.moxy-community:moxy:${moxy_version}"
+    kapt "com.github.moxy-community:moxy-compiler:${moxy_version}"
+    implementation "com.github.moxy-community:moxy-android:${moxy_version}"
+    implementation "com.github.moxy-community:moxy-androidx:${moxy_version}"
 
     // ui
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

@@ -21,6 +21,7 @@ class MApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         daggerAppComponent = DaggerAppComponent
                 .builder()
                 .appContext(this.applicationContext)
@@ -33,5 +34,13 @@ class MApplication : Application() {
 //        Log.d("SSS", "context1 = $appContext")
         Log.d("SSS", "context2 = " + applicationContext)
         Log.d("SSS", "api = " + api)
+    }
+
+    companion object {
+        lateinit var instance: MApplication
+
+        fun getDaggerComponents(): AppComponent {
+            return instance.daggerAppComponent
+        }
     }
 }
