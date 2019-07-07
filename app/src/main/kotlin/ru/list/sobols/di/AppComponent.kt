@@ -3,6 +3,7 @@ package ru.list.sobols.di
 import dagger.BindsInstance
 import dagger.Component
 import ru.list.sobols.MApplication
+import ru.list.sobols.api.Client
 import javax.inject.Singleton
 
 
@@ -16,8 +17,9 @@ interface AppComponent {
         fun build(): AppComponent
 
         @BindsInstance
-        fun application(application: MApplication): Builder
+        fun appContext(application: MApplication): Builder
 
-//        fun appModule(appModule: AppModule): Builder
+        @BindsInstance
+        fun retrofit(client: Client): Builder
     }
 }
