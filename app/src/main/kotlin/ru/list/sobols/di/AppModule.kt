@@ -12,9 +12,6 @@ import javax.inject.Singleton
 @Module
 class AppModule {
     @Provides
-    fun provedStub() = InjectedStub()
-
-    @Provides
     @Singleton
     fun provideApplication(appContext: Context) = appContext
 

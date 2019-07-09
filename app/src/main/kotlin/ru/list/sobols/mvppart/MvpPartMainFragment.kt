@@ -1,12 +1,11 @@
 package ru.list.sobols.mvppart
 
-import android.os.Bundle
-import android.util.Log
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.list.sobols.MApplication
 import ru.list.sobols.di.DaggerMvpPartComponent
 import ru.list.sobols.di.MvpPartScope
+import ru.list.sobols.model.HouseModel
 import javax.inject.Inject
 
 class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
@@ -25,15 +24,12 @@ class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
                 .build().inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-//        if (savedInstanceState == null) {
-//            DaggerMvpPartComponent.builder()
-//                    .appComponent(MApplication.getDaggerComponents())
-//                    .build().inject(this)
-//        }
-        //     MApplication.getDaggerComponents().inject(this)
-        super.onCreate(savedInstanceState)
-        Log.d("SSS", "MvpPartMainFragment presenter = $presenter")
+    override fun showItems(items: List<HouseModel>?) {
+        //  Log.d("SSS", items.toString())
+    }
+
+    override fun showError(throwable: Throwable?) {
+
     }
 
     companion object {

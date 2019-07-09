@@ -1,6 +1,5 @@
 package ru.list.sobols.mvppart
 
-import android.util.Log
 import moxy.InjectViewState
 import ru.list.sobols.di.MvpPartScope
 import ru.list.sobols.interactor.IInteractor
@@ -12,12 +11,14 @@ import javax.inject.Inject
 class MvpPartMainPresenter @Inject constructor(val interactor: IInteractor) :
         BasePresenter<IMvpPartMainView>() {
 
-    override fun onFirstViewAttach() {
+    public override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        Log.d("SSS", "onFirstViewAttach interactor = $interactor")
+//        Log.d("SSS", "onFirstViewAttach interactor = $interactor")
         interactor.getHouses()
                 .fromIoToMain()
-                .subscribe({ items -> Log.d("SSS", items.toString()) }, { throwable -> Log.e("SSS", throwable.message) })
+                .subscribe(
+                        { items -> viewState.showItems(items) },
+                        { throwable -> viewState.showError(throwable) })
                 .unsubscribeOnDestroy()
     }
 }
