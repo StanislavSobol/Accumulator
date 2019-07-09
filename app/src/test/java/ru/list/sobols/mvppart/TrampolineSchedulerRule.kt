@@ -7,7 +7,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
-public class TrampolineSchedulerRule : TestRule {
+class TrampolineSchedulerRule : TestRule {
 
     override fun apply(base: Statement, d: Description): Statement {
         return object : Statement() {

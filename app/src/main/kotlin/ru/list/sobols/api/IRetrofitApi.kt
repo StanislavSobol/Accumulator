@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import ru.list.sobols.model.HouseModel
 
-interface Api {
+interface IRetrofitApi {
     @GET("user/{id}")
     fun getBook(@Path("id") id: Int): Single<String>
 

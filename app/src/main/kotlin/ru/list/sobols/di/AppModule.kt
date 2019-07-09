@@ -3,8 +3,8 @@ package ru.list.sobols.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import ru.list.sobols.api.Api
-import ru.list.sobols.api.Client
+import ru.list.sobols.api.IRetrofitApi
+import ru.list.sobols.api.RetrofitClient
 import ru.list.sobols.interactor.IInteractor
 import ru.list.sobols.interactor.Interactor
 import javax.inject.Singleton
@@ -17,9 +17,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideApi() = Client().api
+    fun provideRetrofitApi() = RetrofitClient().iRetrofitApi
 
     @Provides
     @Singleton
-    fun provideInteractor(api: Api): IInteractor = Interactor(api)
+    fun provideInteractor(iRetrofitApi: IRetrofitApi): IInteractor = Interactor(iRetrofitApi)
 }

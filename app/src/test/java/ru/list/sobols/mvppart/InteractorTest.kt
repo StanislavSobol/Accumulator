@@ -9,7 +9,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
-import ru.list.sobols.api.Api
+import ru.list.sobols.api.IRetrofitApi
 import ru.list.sobols.interactor.IInteractor
 import ru.list.sobols.interactor.Interactor
 import ru.list.sobols.model.HouseModel
@@ -23,26 +23,26 @@ import ru.list.sobols.model.HouseModel
 class InteractorTest {
 
     @Mock
-    lateinit var api: Api
+    lateinit var iRetrofitApi: IRetrofitApi
 
     lateinit var interactor: IInteractor //? = null
     var houses = mutableListOf<HouseModel>()
 
     @Before
     fun setup() {
-        interactor = Interactor(api)
+        interactor = Interactor(iRetrofitApi)
 
         houses.clear()
         houses.add(mock(HouseModel::class.java))
         houses.add(mock(HouseModel::class.java))
         houses.add(mock(HouseModel::class.java))
 
-        `when`(api.getHouses()).thenAnswer { Single.just(houses) }
+        `when`(iRetrofitApi.getHouses()).thenAnswer { Single.just(houses) }
     }
 
     @Test
     fun getHouses_testObserver() {
-        val testObserver = api.getHouses().test()
+        val testObserver = iRetrofitApi.getHouses().test()
         testObserver.awaitTerminalEvent()
         testObserver
                 .assertNoErrors()
@@ -51,7 +51,7 @@ class InteractorTest {
 
     @Test
     fun getHouses_compareWithApiResult() {
-        val apiResult = api.getHouses().blockingGet()
+        val apiResult = iRetrofitApi.getHouses().blockingGet()
         val interactorResult = interactor.getHouses().blockingGet()
         assertTrue(apiResult == interactorResult)
     }
