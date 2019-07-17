@@ -5,6 +5,7 @@ import ru.list.sobols.di.MvpPartScope
 import ru.list.sobols.interactor.IInteractor
 import ru.list.sobols.model.HouseModel
 import ru.list.sobols.utils.fromIoToMain
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @MvpPartScope
@@ -13,10 +14,11 @@ class MvpPartMainPresenter @Inject constructor(val interactor: IInteractor) :
         BasePresenter<IMvpPartMainView>() {
 
     public override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
         interactor.getHouses()
+                .delay(2, TimeUnit.SECONDS)
                 .fromIoToMain()
                 .map { items -> convertHousesToListItems(items) }
+                .showProgress()
                 .subscribe(
                         { items -> viewState.showItems(items) },
                         { throwable -> viewState.showError(throwable) })

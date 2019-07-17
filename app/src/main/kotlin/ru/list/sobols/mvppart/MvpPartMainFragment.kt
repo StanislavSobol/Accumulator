@@ -3,11 +3,14 @@ package ru.list.sobols.mvppart
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.full_progress_bar_content.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.list.sobols.MApplication
 import ru.list.sobols.di.DaggerMvpPartComponent
 import ru.list.sobols.di.MvpPartScope
+import ru.list.sobols.utils.gone
+import ru.list.sobols.utils.show
 import javax.inject.Inject
 
 class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
@@ -40,6 +43,14 @@ class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
 
     override fun showError(throwable: Throwable?) {
 
+    }
+
+    override fun showProgress() {
+        progressBar.show()
+    }
+
+    override fun hideProgress() {
+        progressBar.gone()
     }
 
     companion object {

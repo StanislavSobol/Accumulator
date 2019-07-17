@@ -6,10 +6,11 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <include layout="@layout/full_progress_bar_content" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <include layout="@layout/full_progress_bar_content" />
+
 </FrameLayout>

@@ -1,10 +1,9 @@
 package ru.list.sobols.mvppart
 
-import moxy.MvpView
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface IMvpPartMainView : MvpView {
+interface IMvpPartMainView : IMvpPartBaseView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun showItems(items: List<IMvpPartMainAdapterDelegate>)
