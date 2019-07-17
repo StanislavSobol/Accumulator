@@ -1,6 +1,6 @@
-package ru.list.sobols.mvppart
+package ru.list.sobols.mvppart.houses
 
-interface IMvpPartMainAdapterDelegate {
+interface IMvpPartHousesAdapterDelegate {
 
     fun getType(): Int
 

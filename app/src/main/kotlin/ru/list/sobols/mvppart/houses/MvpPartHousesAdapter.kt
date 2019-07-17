@@ -1,4 +1,4 @@
-package ru.list.sobols.mvppart
+package ru.list.sobols.mvppart.houses
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +10,13 @@ import ru.list.sobols.R
 
 class MvpPartHousesAdapter : RecyclerView.Adapter<MvpPartHousesAdapter.Holder>() {
 
-    private val items = mutableListOf<IMvpPartMainAdapterDelegate>()
+    private val items = mutableListOf<IMvpPartHousesAdapterDelegate>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return when (viewType) {
-            IMvpPartMainAdapterDelegate.REGION_TYPE ->
+            IMvpPartHousesAdapterDelegate.REGION_TYPE ->
                 Holder(LayoutInflater.from(parent.context).inflate(R.layout.item_region, parent, false))
-            IMvpPartMainAdapterDelegate.HOUSE_TYPE ->
+            IMvpPartHousesAdapterDelegate.HOUSE_TYPE ->
                 Holder(LayoutInflater.from(parent.context).inflate(R.layout.item_house, parent, false))
             else -> throw IllegalStateException("Wrong type of houses adapter item")
         }
@@ -30,7 +30,7 @@ class MvpPartHousesAdapter : RecyclerView.Adapter<MvpPartHousesAdapter.Holder>()
 
     override fun getItemViewType(position: Int) = items[position].getType()
 
-    fun setItems(delegates: List<IMvpPartMainAdapterDelegate>) {
+    fun setItems(delegates: List<IMvpPartHousesAdapterDelegate>) {
         items.clear()
         items.addAll(delegates)
         notifyDataSetChanged()
@@ -38,13 +38,13 @@ class MvpPartHousesAdapter : RecyclerView.Adapter<MvpPartHousesAdapter.Holder>()
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: IMvpPartMainAdapterDelegate) {
+        fun bind(item: IMvpPartHousesAdapterDelegate) {
             when (item.getType()) {
-                IMvpPartMainAdapterDelegate.REGION_TYPE -> bindLetter(item as RegionListItemModel)
-                IMvpPartMainAdapterDelegate.HOUSE_TYPE -> bindHouse(item as HouseListItemModel)
+                IMvpPartHousesAdapterDelegate.REGION_TYPE -> bindLetter(item as RegionListItemModel)
+                IMvpPartHousesAdapterDelegate.HOUSE_TYPE -> bindHouse(item as HouseListItemModel)
             }
 
-            if (item.getType() == IMvpPartMainAdapterDelegate.REGION_TYPE) {
+            if (item.getType() == IMvpPartHousesAdapterDelegate.REGION_TYPE) {
                 bindLetter(item as RegionListItemModel)
             }
         }

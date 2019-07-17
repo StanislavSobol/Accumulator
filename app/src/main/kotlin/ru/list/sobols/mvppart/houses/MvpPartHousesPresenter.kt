@@ -1,17 +1,18 @@
-package ru.list.sobols.mvppart
+package ru.list.sobols.mvppart.houses
 
 import moxy.InjectViewState
 import ru.list.sobols.di.MvpPartScope
 import ru.list.sobols.interactor.IInteractor
 import ru.list.sobols.model.HouseModel
+import ru.list.sobols.mvppart.MvpPartBasePresenter
 import ru.list.sobols.utils.fromIoToMain
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @MvpPartScope
 @InjectViewState
-class MvpPartMainPresenter @Inject constructor(val interactor: IInteractor) :
-        BasePresenter<IMvpPartMainView>() {
+class MvpPartHousesPresenter @Inject constructor(val interactor: IInteractor) :
+        MvpPartBasePresenter<IMvpPartHousesView>() {
 
     public override fun onFirstViewAttach() {
         interactor.getHouses()
@@ -25,8 +26,8 @@ class MvpPartMainPresenter @Inject constructor(val interactor: IInteractor) :
                 .unsubscribeOnDestroy()
     }
 
-    private fun convertHousesToListItems(houseModels: List<HouseModel>): List<IMvpPartMainAdapterDelegate> {
-        val result = mutableListOf<IMvpPartMainAdapterDelegate>()
+    private fun convertHousesToListItems(houseModels: List<HouseModel>): List<IMvpPartHousesAdapterDelegate> {
+        val result = mutableListOf<IMvpPartHousesAdapterDelegate>()
         var region: String? = null
 
         houseModels.sortedBy { item -> item.region }.forEach { item ->

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
 import moxy.MvpAppCompatFragment
 import ru.list.sobols.R
 
-abstract class BaseRecyclerViewMvpFragment : MvpAppCompatFragment() {
+abstract class MvpPartBaseRecyclerViewFragment : MvpAppCompatFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_list, container, false)

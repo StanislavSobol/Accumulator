@@ -5,7 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import moxy.MvpPresenter
 
-abstract class BasePresenter<T : IMvpPartBaseView> : MvpPresenter<T>() {
+abstract class MvpPartBasePresenter<T : IMvpPartBaseView> : MvpPresenter<T>() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

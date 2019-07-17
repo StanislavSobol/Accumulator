@@ -1,7 +1,7 @@
 package ru.list.sobols.di
 
 import dagger.Component
-import ru.list.sobols.mvppart.MvpPartMainFragment
+import ru.list.sobols.mvppart.houses.MvpPartHousesFragment
 
 @MvpPartScope
 @Component(
@@ -12,6 +12,6 @@ interface MvpPartComponent {
 
     // fun interactor() : IInteractor
 
-    fun inject(body: MvpPartMainFragment)
+    fun inject(body: MvpPartHousesFragment)
 
 }

@@ -11,10 +11,8 @@ import org.mockito.junit.MockitoJUnitRunner
 import ru.list.sobols.TrampolineSchedulerRule
 import ru.list.sobols.interactor.IInteractor
 import ru.list.sobols.model.HouseModel
+import ru.list.sobols.mvppart.houses.MvpPartHousesPresenter
 
-/**
- * Test for {@link MvpPartMainPresenter}
- */
 @RunWith(MockitoJUnitRunner::class)
 class MvpPartMainPresenterTest {
 
@@ -28,25 +26,25 @@ class MvpPartMainPresenterTest {
 
     var houses = mutableListOf<HouseModel>()
 
-    lateinit var presenter: MvpPartMainPresenter
+    lateinit var presenterHousesPresenter: MvpPartHousesPresenter
 
     @Before
     fun setup() {
-        presenter = MvpPartMainPresenter(interactor)
+        presenterHousesPresenter = MvpPartHousesPresenter(interactor)
 
         houses.clear()
         houses.add(mock(HouseModel::class.java))
         houses.add(mock(HouseModel::class.java))
         houses.add(mock(HouseModel::class.java))
 
-        presenter.setViewState(viewState)
+        presenterHousesPresenter.setViewState(viewState)
     }
 
     @Test
     fun onFirstViewAttach_showItems() {
         `when`(interactor.getHouses()).thenAnswer { Single.just(houses) }
 
-        presenter.onFirstViewAttach()
+        presenterHousesPresenter.onFirstViewAttach()
         verify(viewState).showItems(houses)
         verifyNoMoreInteractions(viewState)
     }
@@ -57,7 +55,7 @@ class MvpPartMainPresenterTest {
 
         `when`(interactor.getHouses()).thenReturn(Single.error(expectedException))
 
-        presenter.onFirstViewAttach()
+        presenterHousesPresenter.onFirstViewAttach()
 
         verify(viewState).showError(expectedException)
         verifyNoMoreInteractions(viewState)

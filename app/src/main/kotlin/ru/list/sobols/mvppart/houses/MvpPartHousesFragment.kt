@@ -1,4 +1,4 @@
-package ru.list.sobols.mvppart
+package ru.list.sobols.mvppart.houses
 
 import android.os.Bundle
 import android.view.View
@@ -9,21 +9,22 @@ import moxy.presenter.ProvidePresenter
 import ru.list.sobols.MApplication
 import ru.list.sobols.di.DaggerMvpPartComponent
 import ru.list.sobols.di.MvpPartScope
+import ru.list.sobols.mvppart.MvpPartBaseRecyclerViewFragment
 import ru.list.sobols.utils.gone
 import ru.list.sobols.utils.show
 import javax.inject.Inject
 
-class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
+class MvpPartHousesFragment : MvpPartBaseRecyclerViewFragment(), IMvpPartHousesView {
 
     private lateinit var adapter: MvpPartHousesAdapter
 
     @MvpPartScope
     @Inject
     @InjectPresenter
-    lateinit var presenter: MvpPartMainPresenter
+    lateinit var presenterHousesPresenter: MvpPartHousesPresenter
 
     @ProvidePresenter
-    fun providePresenter() = presenter
+    fun providePresenter() = presenterHousesPresenter
 
     init {
         DaggerMvpPartComponent.builder()
@@ -37,7 +38,7 @@ class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
         recyclerView.adapter = adapter
     }
 
-    override fun showItems(items: List<IMvpPartMainAdapterDelegate>) {
+    override fun showItems(items: List<IMvpPartHousesAdapterDelegate>) {
         adapter.setItems(items)
     }
 
@@ -54,6 +55,6 @@ class MvpPartMainFragment : BaseRecyclerViewMvpFragment(), IMvpPartMainView {
     }
 
     companion object {
-        fun newInstance() = MvpPartMainFragment()
+        fun newInstance() = MvpPartHousesFragment()
     }
 }
