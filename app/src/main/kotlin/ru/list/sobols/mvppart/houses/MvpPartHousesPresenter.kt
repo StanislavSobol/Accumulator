@@ -15,6 +15,14 @@ class MvpPartHousesPresenter @Inject constructor(val interactor: IInteractor) :
         MvpPartBasePresenter<IMvpPartHousesView>() {
 
     public override fun onFirstViewAttach() {
+        subscribeToHouses()
+    }
+
+    fun onSwipeToRefresh() {
+        subscribeToHouses()
+    }
+
+    private fun subscribeToHouses() {
         interactor.getHouses()
                 .delay(2, TimeUnit.SECONDS)
                 .fromIoToMain()
@@ -44,4 +52,5 @@ class MvpPartHousesPresenter @Inject constructor(val interactor: IInteractor) :
 
         return result
     }
+
 }

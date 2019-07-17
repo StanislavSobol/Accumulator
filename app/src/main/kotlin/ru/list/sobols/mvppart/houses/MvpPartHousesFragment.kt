@@ -11,6 +11,7 @@ import ru.list.sobols.di.DaggerMvpPartComponent
 import ru.list.sobols.di.MvpPartScope
 import ru.list.sobols.mvppart.MvpPartBaseRecyclerViewFragment
 import ru.list.sobols.utils.gone
+import ru.list.sobols.utils.hide
 import ru.list.sobols.utils.show
 import javax.inject.Inject
 
@@ -21,10 +22,10 @@ class MvpPartHousesFragment : MvpPartBaseRecyclerViewFragment(), IMvpPartHousesV
     @MvpPartScope
     @Inject
     @InjectPresenter
-    lateinit var presenterHousesPresenter: MvpPartHousesPresenter
+    lateinit var presenter: MvpPartHousesPresenter
 
     @ProvidePresenter
-    fun providePresenter() = presenterHousesPresenter
+    fun providePresenter() = presenter
 
     init {
         DaggerMvpPartComponent.builder()
@@ -36,6 +37,7 @@ class MvpPartHousesFragment : MvpPartBaseRecyclerViewFragment(), IMvpPartHousesV
         super.onViewCreated(view, savedInstanceState)
         adapter = MvpPartHousesAdapter()
         recyclerView.adapter = adapter
+        swipeRefreshLayout.setOnRefreshListener { presenter.onSwipeToRefresh() }
     }
 
     override fun showItems(items: List<IMvpPartHousesAdapterDelegate>) {
@@ -47,11 +49,19 @@ class MvpPartHousesFragment : MvpPartBaseRecyclerViewFragment(), IMvpPartHousesV
     }
 
     override fun showProgress() {
-        progressBar.show()
+        if (!swipeRefreshLayout.isRefreshing) {
+            progressBar.show()
+            recyclerView.hide()
+        }
     }
 
     override fun hideProgress() {
-        progressBar.gone()
+        if (swipeRefreshLayout.isRefreshing) {
+            swipeRefreshLayout.isRefreshing = false
+        } else {
+            progressBar.gone()
+            recyclerView.show()
+        }
     }
 
     companion object {

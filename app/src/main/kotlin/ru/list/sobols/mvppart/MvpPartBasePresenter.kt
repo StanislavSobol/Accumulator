@@ -28,4 +28,5 @@ abstract class MvpPartBasePresenter<T : IMvpPartBaseView> : MvpPresenter<T>() {
                 .doOnSuccess { viewState.hideProgress() }
                 .doOnError { viewState.hideProgress() }
     }
+
 }
