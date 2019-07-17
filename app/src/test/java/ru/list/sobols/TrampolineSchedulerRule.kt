@@ -1,4 +1,4 @@
-package ru.list.sobols.mvppart
+package ru.list.sobols
 
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins

@@ -1,4 +1,4 @@
-package ru.list.sobols.mvppart
+package ru.list.sobols
 
 import io.reactivex.Single
 import org.junit.Assert.assertTrue
@@ -25,7 +25,7 @@ class InteractorTest {
     @Mock
     lateinit var iRetrofitApi: IRetrofitApi
 
-    lateinit var interactor: IInteractor //? = null
+    lateinit var interactor: IInteractor
     var houses = mutableListOf<HouseModel>()
 
     @Before
