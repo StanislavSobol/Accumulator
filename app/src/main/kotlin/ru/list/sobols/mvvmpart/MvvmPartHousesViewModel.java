@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -18,28 +19,36 @@ public class MvvmPartHousesViewModel extends ViewModel {
     private IInteractor interactor;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private MutableLiveData<List<IMvpPartHousesAdapterDelegate>> liveData;
+    private MutableLiveData<Boolean> progressLiveData;
+    private MutableLiveData<List<IMvpPartHousesAdapterDelegate>> housesLiveData;
 
     public MvvmPartHousesViewModel(@NonNull IInteractor interactor) {
         this.interactor = interactor;
     }
 
-    public LiveData<List<IMvpPartHousesAdapterDelegate>> getLiveData() {
-        return liveData;
+    public MutableLiveData<Boolean> getProgressLiveData() {
+        if (progressLiveData == null) {
+            progressLiveData = new MutableLiveData<>();
+        }
+        return progressLiveData;
     }
 
     public LiveData<List<IMvpPartHousesAdapterDelegate>> subscribeToHouses() {
-        if (liveData == null) {
-            liveData = new MutableLiveData<>();
+        if (housesLiveData == null) {
+            housesLiveData = new MutableLiveData<>();
             compositeDisposable.add(
                     interactor.getHouses()
+                            .delay(2, TimeUnit.SECONDS)
+                            .doOnSubscribe(disposable -> progressLiveData.postValue(true))
+                            .doOnSuccess(disposable -> progressLiveData.postValue(false))
+                            .doOnError(disposable -> progressLiveData.postValue(false))
                             .subscribeOn(Schedulers.io())
                             .map(HouseListItemDisplayModel.Companion::listFromHouseModels)
-                            .subscribe(items -> liveData.postValue(items), throwable -> {
+                            .subscribe(items -> housesLiveData.postValue(items), throwable -> {
                             })
             );
         }
-        return liveData;
+        return housesLiveData;
     }
 
     @Override

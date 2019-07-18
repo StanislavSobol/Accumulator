@@ -4,17 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,7 +19,6 @@ import ru.list.sobols.BaseFragment;
 import ru.list.sobols.MApplication;
 import ru.list.sobols.R;
 import ru.list.sobols.di.DaggerMvvmPartComponent;
-import ru.list.sobols.mvppart.houses.IMvpPartHousesAdapterDelegate;
 import ru.list.sobols.mvppart.houses.MvpPartHousesAdapter;
 
 public class MvvmPartHousesFragment extends BaseFragment {
@@ -58,14 +54,11 @@ public class MvvmPartHousesFragment extends BaseFragment {
         final MvpPartHousesAdapter adapter = new MvpPartHousesAdapter();
         recyclerView.setAdapter(adapter);
 
-        viewModel.subscribeToHouses();
-        LiveData<List<IMvpPartHousesAdapterDelegate>> liveData = viewModel.getLiveData();
-        liveData.observe(this, new Observer<List<IMvpPartHousesAdapterDelegate>>() {
-            @Override
-            public void onChanged(List<IMvpPartHousesAdapterDelegate> houseListItemDisplayModels) {
-                adapter.setItems(houseListItemDisplayModels);
-            }
-        });
+        final ProgressBar progressBar = view.findViewById(R.id.progressBar);
+
+        viewModel.getProgressLiveData().observe(this,
+                visible -> progressBar.setVisibility(visible ? View.VISIBLE : View.GONE));
+        viewModel.subscribeToHouses().observe(this, adapter::setItems);
     }
 
     @NonNull
