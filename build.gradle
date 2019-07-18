@@ -31,4 +31,5 @@ ext {
     compat_version = "1.0.2"
     dagger_version = "2.14.1"
     moxy_version = "1.0.13"
+    acrh_components_version = "1.1.1"
 }

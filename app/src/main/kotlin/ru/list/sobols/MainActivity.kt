@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import ru.list.sobols.mvppart.houses.MvpPartHousesFragment
+import ru.list.sobols.mvvmpart.MvvmPartHousesFragment
 
 class MainActivity : AppCompatActivity(), IMainRouter {
-
 
     private var mFrameHolder: FrameLayout? = null
 
@@ -15,14 +15,21 @@ class MainActivity : AppCompatActivity(), IMainRouter {
         setContentView(R.layout.activity_main)
         mFrameHolder = findViewById(R.id.mainActivityFrameHolder)
         if (savedInstanceState == null) {
-            toMvvmFragment()
+            toMvvmHousesFragment()
         }
     }
 
-    override fun toMvvmFragment() {
+    override fun toMvpHousesFragment() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.mainActivityFrameHolder, MvpPartHousesFragment.newInstance())
+                .commit()
+    }
+
+    override fun toMvvmHousesFragment() {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.mainActivityFrameHolder, MvvmPartHousesFragment.newInstance())
                 .commit()
     }
 }

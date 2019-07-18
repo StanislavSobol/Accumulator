@@ -20,6 +20,7 @@ class MApplication : Application() {
         daggerAppComponent = DaggerAppComponent
                 .builder()
                 .appContext(this.applicationContext)
+//                .application(this)
                 .build()
         daggerAppComponent.inject(this)
     }

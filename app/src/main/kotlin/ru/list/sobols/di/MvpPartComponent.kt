@@ -10,8 +10,5 @@ import ru.list.sobols.mvppart.houses.MvpPartHousesFragment
 )
 interface MvpPartComponent {
 
-    // fun interactor() : IInteractor
-
     fun inject(body: MvpPartHousesFragment)
-
 }

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_house.view.*
 import kotlinx.android.synthetic.main.item_region.view.*
 import ru.list.sobols.R
+import ru.list.sobols.model.HouseListItemDisplayModel
+import ru.list.sobols.model.RegionListItemDislpayModel
 
 class MvpPartHousesAdapter : RecyclerView.Adapter<MvpPartHousesAdapter.Holder>() {
 
@@ -40,22 +42,22 @@ class MvpPartHousesAdapter : RecyclerView.Adapter<MvpPartHousesAdapter.Holder>()
 
         fun bind(item: IMvpPartHousesAdapterDelegate) {
             when (item.getType()) {
-                IMvpPartHousesAdapterDelegate.REGION_TYPE -> bindLetter(item as RegionListItemModel)
-                IMvpPartHousesAdapterDelegate.HOUSE_TYPE -> bindHouse(item as HouseListItemModel)
+                IMvpPartHousesAdapterDelegate.REGION_TYPE -> bindLetter(item as RegionListItemDislpayModel)
+                IMvpPartHousesAdapterDelegate.HOUSE_TYPE -> bindHouse(item as HouseListItemDisplayModel)
             }
 
             if (item.getType() == IMvpPartHousesAdapterDelegate.REGION_TYPE) {
-                bindLetter(item as RegionListItemModel)
+                bindLetter(item as RegionListItemDislpayModel)
             }
         }
 
-        private fun bindLetter(model: RegionListItemModel) {
-            itemView.houseLetter.text = model.region
+        private fun bindLetter(dislpayModel: RegionListItemDislpayModel) {
+            itemView.houseLetter.text = dislpayModel.region
         }
 
-        private fun bindHouse(model: HouseListItemModel) {
-            itemView.houseName.text = model.name
-            itemView.houseRegion.text = model.region
+        private fun bindHouse(displayModel: HouseListItemDisplayModel) {
+            itemView.houseName.text = displayModel.name
+            itemView.houseRegion.text = displayModel.region
         }
 
     }

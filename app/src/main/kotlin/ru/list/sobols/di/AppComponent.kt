@@ -21,5 +21,8 @@ interface AppComponent {
 
         @BindsInstance
         fun appContext(appContext: Context): Builder
+//
+//        @BindsInstance
+//        fun application(application: Application): Builder
     }
 }
