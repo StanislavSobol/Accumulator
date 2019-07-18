@@ -18,10 +18,6 @@ abstract class MvpPartBasePresenter<T : IMvpPartBaseView> : MvpPresenter<T>() {
         compositeDisposable.add(this)
     }
 
-//    protected fun Disposable.showProgress(): Disposable {
-//        return compositeDisposable
-//    }
-
     protected fun <T> Single<T>.showProgress(): Single<T> {
         return this
                 .doOnSubscribe { viewState.showProgress() }

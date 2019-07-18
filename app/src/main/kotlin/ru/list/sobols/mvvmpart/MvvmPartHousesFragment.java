@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import javax.inject.Inject;
 
@@ -32,6 +33,9 @@ public class MvvmPartHousesFragment extends BaseFragment {
 
     private MvvmPartHousesViewModel viewModel;
 
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -47,23 +51,41 @@ public class MvvmPartHousesFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), layoutManager.getOrientation()));
         final MvpPartHousesAdapter adapter = new MvpPartHousesAdapter();
         recyclerView.setAdapter(adapter);
 
-        final ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.progressBar);
 
-        viewModel.getProgressLiveData().observe(this,
-                visible -> progressBar.setVisibility(visible ? View.VISIBLE : View.GONE));
+        viewModel.getProgressLiveData().observe(this, this::setProgressVisibility);
         viewModel.subscribeToHouses().observe(this, adapter::setItems);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> viewModel.requestHouses());
     }
 
     @NonNull
     @Override
     public String provideActivityTitle() {
         return "MVVM TITLE";
+    }
+
+    private void setProgressVisibility(boolean visible) {
+        if (visible) {
+            if (!swipeRefreshLayout.isRefreshing()) {
+                progressBar.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+        } else {
+            if (swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.setRefreshing(false);
+            } else {
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

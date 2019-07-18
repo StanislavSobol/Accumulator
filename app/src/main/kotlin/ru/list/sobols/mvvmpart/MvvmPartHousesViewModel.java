@@ -36,19 +36,23 @@ public class MvvmPartHousesViewModel extends ViewModel {
     public LiveData<List<IMvpPartHousesAdapterDelegate>> subscribeToHouses() {
         if (housesLiveData == null) {
             housesLiveData = new MutableLiveData<>();
-            compositeDisposable.add(
-                    interactor.getHouses()
-                            .delay(2, TimeUnit.SECONDS)
-                            .doOnSubscribe(disposable -> progressLiveData.postValue(true))
-                            .doOnSuccess(disposable -> progressLiveData.postValue(false))
-                            .doOnError(disposable -> progressLiveData.postValue(false))
-                            .subscribeOn(Schedulers.io())
-                            .map(HouseListItemDisplayModel.Companion::listFromHouseModels)
-                            .subscribe(items -> housesLiveData.postValue(items), throwable -> {
-                            })
-            );
+            requestHouses();
         }
         return housesLiveData;
+    }
+
+    public void requestHouses() {
+        compositeDisposable.add(
+                interactor.getHouses()
+                        .delay(2, TimeUnit.SECONDS)
+                        .doOnSubscribe(disposable -> progressLiveData.postValue(true))
+                        .doOnSuccess(disposable -> progressLiveData.postValue(false))
+                        .doOnError(disposable -> progressLiveData.postValue(false))
+                        .subscribeOn(Schedulers.io())
+                        .map(HouseListItemDisplayModel.Companion::listFromHouseModels)
+                        .subscribe(items -> housesLiveData.postValue(items), throwable -> {
+                        })
+        );
     }
 
     @Override
